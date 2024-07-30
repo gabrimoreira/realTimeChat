@@ -1,6 +1,7 @@
 const express = require("express")
 const {Server} = require("socket.io")
 const { createServer } = require('node:http')
+const path = require('path')
 
 const app = express()
 
@@ -10,7 +11,7 @@ const server = createServer(app)
 const io = new Server(server)
 
 app.get("/", (req,res)=>{
-    res.send("<h1>Server is on!</h1>")
+    res.sendFile(path.join(__dirname, '../client/index.html'));
 })
 
 app.listen(3000, ()=>{
