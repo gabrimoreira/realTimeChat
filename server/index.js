@@ -7,6 +7,8 @@ const app = express()
 //This is necessary to give direct acess of http server to socket.io
 const server = createServer(app)
 
+const io = new Server(server)
+
 app.get("/", (req,res)=>{
     res.send("<h1>Server is on!</h1>")
 })
