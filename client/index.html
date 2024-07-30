@@ -6,10 +6,17 @@
     <title>Chat App</title>
 </head>
 <body>
-    
-    
+    <div id="screen">
+        <ul class="messages">
+            <li>teste</li>
+        </ul>
+    </div>
+    <form action="POST">
+        <input type="text" id="message">
+        <input type="submit" value="Send">
+    </form>
   
     <script src="/socket.io/socket.io.js"></script>
-    <script src="index.js"></script>
+    <script src="/index.js"></script>
 </body>
 </html>
