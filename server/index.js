@@ -9,7 +9,7 @@ const app = express();
 const server = createServer(app);
 const io = new Server(server);
 
-
+//This is to lead with static files like index.js
 app.use(express.static(path.join(__dirname, '../client')));
 
 app.get("/", (req, res) => {
@@ -21,6 +21,12 @@ io.on('connection', (socket) => {
     socket.on('disconnect', () => {
         console.log('User disconnected');
     });
+    socket.on('message', (msg)=>{
+        console.log("Message: " + msg);
+        socket.broadcast.emit('message', msg)
+    } 
+)
+
 });
 
 server.listen(3000, () => {

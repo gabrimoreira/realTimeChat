@@ -3,18 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Chat App</title>
 </head>
 <body>
     <div id="screen">
-        <ul class="messages">
-            <li>teste</li>
+        <ul id="messages">
+            <li class="message">teste1</li>
+            <li class="message">teste2</li>
         </ul>
     </div>
-    <form action="POST">
+    <form>
         <input type="text" id="message">
-        <input type="submit" value="Send">
+        <input type="submit" value="Send" id="submit">
     </form>
+
+
   
     <script src="/socket.io/socket.io.js"></script>
     <script src="/index.js"></script>
