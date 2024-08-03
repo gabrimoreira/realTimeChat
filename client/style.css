@@ -4,3 +4,7 @@
 .externalMessage{
     color: blue;
 }
+
+#roomName{
+    font-size: large;
+}
