@@ -1,20 +1,26 @@
+require('dotenv').config();
 const express = require("express");
 const { Server } = require("socket.io");
 const { createServer } = require('node:http');
 const path = require('path');
-
-
+const PORT = process.env.PORT || 3000;
 const app = express();
 
-//This is necessary to give direct acess of http server to socket.io
+// Serve the static files from the React app (build folder)
+app.use(express.static(path.join(__dirname, '../client/dist')));
+
+// Handle all other routes by serving the React app
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../client/dist/index.html'));
+});
+
+// Start the server and Socket.io
 const server = createServer(app);
-const io = new Server(server);
-
-//This is to lead with static files like index.js
-app.use(express.static(path.join(__dirname, '../client')));
-
-app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/index.html'));
+const io = new Server(server, {
+    cors: {
+        origin: '*',
+        methods: ['GET', 'POST'],
+    },
 });
 
 app.get("/room", (req, res) => {
@@ -34,14 +40,12 @@ io.on('connection', (socket) => {
     socket.on('message', ({room, msg})=>{
         console.log("Message: " + msg);
         console.log("Room: " + room);
-        socket.to(room).emit('message', msg)
+        socket.to(room).emit('message', msg);
     } 
 )
 
 });
 
-
-
-server.listen(3000, () => {
+server.listen(PORT, () => {
     console.log("Server is running on port 3000");
 });
