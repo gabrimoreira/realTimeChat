@@ -6,6 +6,7 @@ const path = require('path');
 const PORT = process.env.PORT || 3000;
 const app = express();
 
+/*
 // Serve the static files from the React app (build folder)
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
@@ -13,12 +14,13 @@ app.use(express.static(path.join(__dirname, '../client/dist')));
 app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, '../client/dist/index.html'));
 });
+*/
 
 // Start the server and Socket.io
 const server = createServer(app);
 const io = new Server(server, {
     cors: {
-        origin: '*',
+        origin: 'https://real-time-chat-omega.vercel.app/',
         methods: ['GET', 'POST'],
     },
 });
