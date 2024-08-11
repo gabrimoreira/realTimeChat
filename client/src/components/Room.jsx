@@ -11,6 +11,10 @@ const Room = () => {
         const room = localStorage.getItem('room');
         socket.emit('joinRoom', { id, room });
 
+        socket.on('connect', () => {
+            console.log('Connected to socket server');
+        });
+
         socket.on('message', (msg) => {
             setMessages((prevMessages) => [...prevMessages, msg]);
         });
