@@ -3,7 +3,9 @@ const express = require("express");
 const { Server } = require("socket.io");
 const { createServer } = require('node:http');
 const path = require('path');
-const PORT = process.env.PORT || 3000;
+
+const PORT = process.env.PORT || 3001;
+const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:5173";
 const app = express();
 
 /*
@@ -20,14 +22,14 @@ app.get('*', (req, res) => {
 const server = createServer(app);
 const io = new Server(server, {
     cors: {
-        origin: 'https://real-time-chat-omega.vercel.app/',
+        origin: FRONTEND_URL,
         methods: ['GET', 'POST'],
     },
 });
 
-app.get("/room", (req, res) => {
+/*app.get("/room", (req, res) => {
     res.sendFile(path.join(__dirname, '../client/room.html'));
-});
+});*/
 
 io.on('connection', (socket) => {
     console.log('A user connected');
@@ -49,5 +51,5 @@ io.on('connection', (socket) => {
 });
 
 server.listen(PORT, () => {
-    console.log("Server is running on port 3000");
+    console.log("Server is running on port " + PORT);
 });
