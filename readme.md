@@ -1,9 +1,13 @@
 # Real-Time Chat Application
 
 This project is a real-time chat application built with React and Tailwind CSS on the client-side and Node.js with Socket.io on the server-side. The application allows users to join chat rooms and exchange messages in real-time.
-![chatRoom](https://github.com/user-attachments/assets/1cca40c3-fb77-46ca-a602-2fb0706ebaaa)
 
-![Alt text](./client/public/chatRoom.png)
+
+<p>
+    <img src="https://github.com/user-attachments/assets/ca466e0f-1daf-4563-89b1-09b9cd39022d" alt="Join Room" width="48%" />
+    <img src="https://github.com/user-attachments/assets/1cca40c3-fb77-46ca-a602-2fb0706ebaaa" alt="Chat Room" width="48%" />
+</p>
+
 
 ## Project Structure
 
