@@ -1,6 +1,7 @@
 # Real-Time Chat Application
 
-This project is a real-time chat application built with React and Tailwind CSS on the client-side and Node.js with Socket.io on the server-side. The application allows users to join chat rooms and exchange messages in real-time.
+This project is a real-time chat application built with React and Tailwind CSS on the client-side and Node.js with Socket.io on the server-side. The application allows users to join chat rooms and exchange messages in real-time. See here how it works:
+https://real-time-chat-jet-six.vercel.app/
 
 
 <p>
@@ -47,13 +48,13 @@ cd realTimeChat
 
 - **Server**:
   ```bash
-  cd server
+  cd ../server
   npm install
   ```
 
 ### 3. Set Environment Variables
 
-Create a `.env` file in the `server` directory with the following content:
+Create a `.env` file in the `client` and `server` directory with the based on .env.local.example:
 
 ```env
 PORT=3001
@@ -77,5 +78,9 @@ FRONTEND_URL=http://localhost:5173
 ### 5. Access the Application
 
 Open your browser and navigate to [http://localhost:5173](http://localhost:5173) to use the chat application.
+
+### 6. Deploy
+
+The deployment can be done using Vercel for the client and Render for the server. It’s important to note that the free version of Render may experience a short delay in response time after periods of inactivity, which is expected behavior.
 
 ---
