@@ -4,8 +4,9 @@ const { Server } = require("socket.io");
 const { createServer } = require('node:http');
 const path = require('path');
 
-const PORT = process.env.PORT || 3001;
-const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:5173";
+
+
+
 const app = express();
 
 /*
@@ -22,8 +23,9 @@ app.get('*', (req, res) => {
 const server = createServer(app);
 const io = new Server(server, {
     cors: {
-        origin: FRONTEND_URL,
+        origin: "http://localhost:5173",
         methods: ['GET', 'POST'],
+
     },
 });
 
@@ -42,7 +44,8 @@ io.on('connection', (socket) => {
     });
 
     socket.on('message', ({room, msg})=>{
-        console.log("Message: " + msg);
+        console.log("User: " + msg.userId)
+        console.log("Message: " + msg.text);
         console.log("Room: " + room);
         socket.to(room).emit('message', msg);
     } 
@@ -50,6 +53,6 @@ io.on('connection', (socket) => {
 
 });
 
-server.listen(PORT, () => {
-    console.log("Server is running on port " + PORT);
+server.listen(3001, () => {
+    console.log("Server is running on port " + 3001);
 });
