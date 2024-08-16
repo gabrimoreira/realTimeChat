@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import socket from '../utils/socket';
 
@@ -7,6 +7,7 @@ const Room = () => {
     const { id: userId, room } = location.state || {}; 
     const [messages, setMessages] = useState([]);
     const [message, setMessage] = useState('');
+    const messagesEndRef = useRef(null); 
 
     useEffect(() => {
         if (userId && room) {
@@ -26,7 +27,12 @@ const Room = () => {
         }
     }, [userId, room]);
 
+    useEffect(() => {
+        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }, [messages]);
+
     const handleSubmit = (e) => {
+        
         e.preventDefault();
         const msg = { userId, text: message };
         socket.emit('message', { room, msg });
@@ -35,10 +41,10 @@ const Room = () => {
     };
 
     return (
-        <div className="bg-black flex flex-col items-center justify-center w-screen min-h-screen p-4">
-            <div className="flex flex-col flex-grow w-full max-w-xl bg-slate-600 shadow-xl rounded-lg overflow-hidden">
-                <div className="flex flex-col-reverse overflow-y-auto p-4 h-full">
-                    <ul className="space-y-4">
+        <div className="bg-black flex flex-col items-center justify-center w-screen h-screen p-4 overflow-hidden">
+            <div className="flex flex-col flex-grow w-full max-w-xl bg-slate-600 shadow-xl rounded-lg">
+                <div className="flex flex-col-reverse  p-4 h-full max-h-[80vh] sm:max-h-[80vh] sm:min-h-[90%]">
+                    <ul className="space-y-4 overflow-y-scroll h-full  ">
                         {messages.map((msg, index) => (
                             <li
                                 className={`p-3 rounded-lg break-words max-w-sm ${
@@ -57,7 +63,7 @@ const Room = () => {
                                 </span>
                                 
                                 </div>
-
+                                <div ref={messagesEndRef}></div>
                             </li>
                         ))}
                     </ul>
